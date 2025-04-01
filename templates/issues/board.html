@@ -1,10 +1,62 @@
 {% extends 'base.html' %}
 
-
 {% block title %}Issues{% endblock title %}
 
 {% block content %}
 <h1>Issues</h1>
-<div>
-    
+<a href="{% url 'new' %}" class="btn btn-success">New Issue</a>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <h5 class="text-primary">To Do</h5>
+            {% for issue in to_do_list %}
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <h3>{{ issue.title }}</h3>
+                        <p>{{ issue.description }}</p>
+                        {% if issue.reporter %}<div>Reporter: {{ issue.reporter }}</div>{% endif %}
+                        {% if issue.assignee %}<div>Assignee: {{ issue.assignee }}</div>{% endif %}
+                        <div>Status: {{ issue.status }}</div>
+                        <a href="{% url 'edit' pk=issue.id %}" class="btn btn-success">Edit</a>
+                        <a href="{% url 'delete' pk=issue.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <h5 class="text-warning">In Progress</h5>
+            {% for issue in in_progress_list %}
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <h3>{{ issue.title }}</h3>
+                        <p>{{ issue.description }}</p>
+                        {% if issue.reporter %}<div>Reporter: {{ issue.reporter }}</div>{% endif %}
+                        {% if issue.assignee %}<div>Assignee: {{ issue.assignee }}</div>{% endif %}
+                        <div>Status: {{ issue.status }}</div>
+                        <a href="{% url 'edit' pk=issue.id %}" class="btn btn-success">Edit</a>
+                        <a href="{% url 'delete' pk=issue.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-4">
+            <h5 class="text-success">Completed</h5>
+            {% for issue in done_list %}
+                <div class="card bg-light mb-3">
+                    <div class="card-body">
+                        <h3>{{ issue.title }}</h3>
+                        <p>{{ issue.description }}</p>
+                        {% if issue.reporter %}<div>Reporter: {{ issue.reporter }}</div>{% endif %}
+                        {% if issue.assignee %}<div>Assignee: {{ issue.assignee }}</div>{% endif %}
+                        <div>Status: {{ issue.status }}</div>
+                        <a href="{% url 'edit' pk=issue.id %}" class="btn btn-success">Edit</a>
+                        <a href="{% url 'delete' pk=issue.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
+{% endblock content %}

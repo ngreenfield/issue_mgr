@@ -3,7 +3,7 @@ from .models import Issue
 
 class IssueAdmin(admin.ModelAdmin):
     list_display = [
-        "name", "summary", "reporter",
+        "title", "summary", "reporter",
         "assignee", "status", "created_on"
     ]
 
